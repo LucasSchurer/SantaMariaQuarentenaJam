@@ -4,19 +4,35 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public delegate void InfectCreature();
+    public static event InfectCreature infectCreature;
+    public float infectRadius = 10f;
+    public LayerMask infectMask;
+    public Transform playerModel;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        // Check if there is creatures that can be infected around the player
+        Collider[] hits = Physics.OverlapSphere(playerModel.position, infectRadius, infectMask);
+        if (hits != null)
         {
-            // Check if can infect other creature
+            foreach (Collider hit in hits)
+            {   
+                print(hit.name);
+            }
         }
+        
+        RaycastHit hita;
+        Ray ray = Camera.main.ViewportPointToRay(Input.mousePosition);
+        
+
+        Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hita, infectRadius, infectMask))
+        {
+            print(hita.transform.name);
+        }       
 
         if (Input.GetKeyDown(KeyCode.E))
         {
