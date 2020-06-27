@@ -102,6 +102,17 @@ public class PlayerAction : MonoBehaviour
 
             selectedCreature = creaturesInRadar[selectedCreatureIndex];
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+            if  (infectCreature != null)
+            {
+                infectCreature(selectedCreature);
+                selectedCreature = null;
+                isSearchingForHost = false;
+                searchingForHost(false);
+                return;
+            }
+                
     }
 
     private IEnumerator InfectionRadar()
