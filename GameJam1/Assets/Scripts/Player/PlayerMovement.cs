@@ -11,17 +11,20 @@ public class PlayerMovement : MonoBehaviour
     private float smoothVelocity;
     public float accelerationGrounded = 0.2f;
     public bool isGrounded;
-    
+    public bool canMove = true;
 
     void Update()
     {
         if (controller.isGrounded)
             velocity.y = 0f;
 
-        float inputX = Input.GetAxisRaw("Horizontal");
+        if (canMove)
+        {
+            float inputX = Input.GetAxisRaw("Horizontal");
 
-        float targetVelocityX = inputX * movementSpeed;
-        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref smoothVelocity, accelerationGrounded);
+            float targetVelocityX = inputX * movementSpeed;
+            velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref smoothVelocity, accelerationGrounded);
+        } 
 
         velocity.y -= gravity * Time.deltaTime;
 
