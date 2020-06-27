@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     private Transform cameraTransform;
-    public Transform playerModelTransform;
+    public Transform playerModel;
     
     public float sensitivity = 100f;
     private float cameraRotation;
@@ -24,6 +24,6 @@ public class PlayerLook : MonoBehaviour
         cameraRotation = Mathf.Clamp(cameraRotation, -90f, 90f);
 
         cameraTransform.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
-        playerModelTransform.Rotate(Vector3.up * inputX);
+        playerModel.Rotate(Vector3.up * inputX);
     }
 }
