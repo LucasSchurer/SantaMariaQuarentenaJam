@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         PlayerAction.infectCreature += InfectedCreature;
+        PlayerAction.searchingForHost += SearchingForHost;
 
         playerMovement = GetComponent<PlayerMovement>();
         playerAction = GetComponent<PlayerAction>();
@@ -45,8 +46,29 @@ public class PlayerController : MonoBehaviour
         cameraMovement.currentTarget = currentCreature.transform;
     }
 
+    private void SearchingForHost(bool isSearching)
+    {
+        ChangeSlowMotion(isSearching);
+        playerMovement.canMove = !isSearching;
+    }
+
     void OnDestroy()
     {
-        PlayerAction.infectCreature -= InfectedCreature;    
+        PlayerAction.infectCreature -= InfectedCreature;   
+        PlayerAction.searchingForHost -= SearchingForHost; 
+    }
+
+    private void ChangeSlowMotion(bool enabled)
+    {
+        if (enabled)
+        {
+            Time.timeScale = 0.5f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        } 
+        else
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
+        }  
     }
 }

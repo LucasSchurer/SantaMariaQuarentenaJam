@@ -6,12 +6,23 @@ public class PlayerAction : MonoBehaviour
 {
     public delegate void InfectCreature(Creature newCreature);
     public static event InfectCreature infectCreature;
+    public delegate void SearchingForHost(bool isSearching);
+    public static event SearchingForHost searchingForHost;
+
     public Creature currentCreature;
     public float infectRadius = 10f;
     public float infectRadarTime = 1f;
     public LayerMask infectMask = 1 << 9;
 
     public List<Creature> creaturesInRadar;
+
+    public bool slowMotion = false;
+
+    public bool isSearchingForHost;
+
+    public Creature selectedCreature;
+    public int selectedCreatureIndex;
+    public int creaturesInRadarCount;
 
     void Start()
     {
@@ -22,8 +33,14 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && creaturesInRadar.Count != 0)
         {
+            isSearchingForHost = !isSearchingForHost;
+
+            if (searchingForHost != null)
+                searchingForHost(isSearchingForHost);
+
+            /*
             // Infect the first creature on the list
             if (creaturesInRadar.Count != 0)
             {
@@ -32,12 +49,58 @@ public class PlayerAction : MonoBehaviour
                     if (infectCreature != null)
                         infectCreature(creaturesInRadar[0]);
                 }
-            }   
+            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentCreature.UseAction();
+        }
+
+        if (isSearchingForHost)
+            SearchHostUI();
+        else if (selectedCreature != null)
+            selectedCreature = null;
+    }
+
+    private void SearchHostUI()
+    {
+        creaturesInRadarCount = creaturesInRadar.Count;
+
+        if (creaturesInRadarCount == 0)
+        {
+            isSearchingForHost = false;
+            if (searchingForHost != null)
+                searchingForHost(isSearchingForHost);
+
+            return;
+        }
+
+        if (selectedCreature == null)
+        {
+            selectedCreature = creaturesInRadar[0];
+            selectedCreatureIndex = 0;
+        }
+            
+        
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            selectedCreatureIndex -= 1;
+
+            if (selectedCreatureIndex < 0)
+                selectedCreatureIndex = creaturesInRadarCount - 1;
+
+            selectedCreature = creaturesInRadar[selectedCreatureIndex];
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            selectedCreatureIndex += 1;
+
+            if (selectedCreatureIndex > creaturesInRadarCount - 1)
+                selectedCreatureIndex = 0;
+
+            selectedCreature = creaturesInRadar[selectedCreatureIndex];
         }
     }
 
