@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerAction : MonoBehaviour
 
     public Creature currentCreature;
     public float infectRadius = 10f;
-    public float infectRadarTime = 1f;
+    public float infectRadarTime = 0.5f;
     public LayerMask infectMask = 1 << 9;
 
     public List<Creature> creaturesInRadar;
@@ -41,17 +42,6 @@ public class PlayerAction : MonoBehaviour
 
             if (searchingForHost != null)
                 searchingForHost(isSearchingForHost);
-
-            /*
-            // Infect the first creature on the list
-            if (creaturesInRadar.Count != 0)
-            {
-                if (creaturesInRadar[0] != null)
-                {
-                    if (infectCreature != null)
-                        infectCreature(creaturesInRadar[0]);
-                }
-            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -82,6 +72,9 @@ public class PlayerAction : MonoBehaviour
         {
             selectedCreature = creaturesInRadar[0];
             selectedCreatureIndex = 0;
+
+            if (possibleHostSelected != null)
+                possibleHostSelected(selectedCreature);
         }
             
         
@@ -115,12 +108,15 @@ public class PlayerAction : MonoBehaviour
             if  (infectCreature != null)
             {
                 infectCreature(selectedCreature);
+                
                 selectedCreature = null;
                 isSearchingForHost = false;
-                searchingForHost(false);
+
+                if (searchingForHost != null)
+                    searchingForHost(false);
+
                 return;
             }
-                
     }
 
     private IEnumerator InfectionRadar()
@@ -132,9 +128,23 @@ public class PlayerAction : MonoBehaviour
             creaturesInRadar.Clear();
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(currentCreature.transform.position, infectRadius, infectMask);
-            if (hits != null)
+            List<Collider2D> tempList = hits.ToList();
+            
+            List<Collider2D> leftHits = tempList.Where
+                (x => x.transform.position.x <= currentCreature.transform.position.x).ToList()
+                .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
+        
+            leftHits.Reverse();
+
+            List<Collider2D> rightHits = tempList.Where
+                (x => x.transform.position.x > currentCreature.transform.position.x).ToList()
+                .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
+
+            List<Collider2D> hitList = leftHits.Concat(rightHits).ToList();
+
+            if (hitList != null)
             {
-                foreach (Collider2D hit in hits)
+                foreach (Collider2D hit in hitList)
                 {   
                     Creature scannedCreature = hit.GetComponent<Creature>();
                     creaturesInRadar.Add(scannedCreature);
