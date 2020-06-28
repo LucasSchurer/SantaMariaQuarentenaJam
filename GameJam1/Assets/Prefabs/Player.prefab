@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1068942532391662177
+--- !u!1 &9086956897948299983
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1068942532391662183}
-  - component: {fileID: 1068942532391662182}
-  - component: {fileID: 1068942532391662180}
-  - component: {fileID: 1068942532391662181}
+  - component: {fileID: 9086956897948299977}
+  - component: {fileID: 9086956897948299982}
+  - component: {fileID: 9086956897948299976}
+  - component: {fileID: 9086956897948299979}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -19,13 +19,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1068942532391662183
+--- !u!4 &9086956897948299977
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068942532391662177}
+  m_GameObject: {fileID: 9086956897948299983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6639616, y: -1.9407674, z: -1.7866211}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,13 +33,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1068942532391662182
+--- !u!114 &9086956897948299982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068942532391662177}
+  m_GameObject: {fileID: 9086956897948299983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82299bac092e57498a050fdbd999f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCreature: {fileID: 0}
+--- !u!114 &9086956897948299976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9086956897948299983}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46e75c934d7f7594da88ca86e43b25df, type: 3}
@@ -47,29 +60,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   gravity: 18
-  movementSpeed: 10
-  accelerationGrounded: 0.1
+  movementSpeed: 7
+  accelerationGrounded: 0.2
   isGrounded: 0
---- !u!114 &1068942532391662180
+  canMove: 1
+--- !u!114 &9086956897948299979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068942532391662177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c82299bac092e57498a050fdbd999f49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCreature: {fileID: 0}
---- !u!114 &1068942532391662181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068942532391662177}
+  m_GameObject: {fileID: 9086956897948299983}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16fb92873f084ea48a8abe29cc02e0c5, type: 3}
@@ -82,3 +83,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   creaturesInRadar: []
+  slowMotion: 0
+  isSearchingForHost: 0
+  selectedCreature: {fileID: 0}
+  selectedCreatureIndex: 0
+  creaturesInRadarCount: 0

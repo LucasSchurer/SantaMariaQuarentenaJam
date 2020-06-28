@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAction playerAction;
     private CameraMovement cameraMovement;
     
-    void Awake()
+    void Start()
     {
         PlayerAction.infectCreature += InfectedCreature;
         PlayerAction.searchingForHost += SearchingForHost;
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerAction = GetComponent<PlayerAction>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
+
+        playerMovement.facing = currentCreature.facing;
 
         // Update the infected creature
         currentCreature.StartInfection();
@@ -34,9 +36,12 @@ public class PlayerController : MonoBehaviour
 
     private void InfectedCreature(Creature newCreature)
     {
+        currentCreature.facing = playerMovement.facing;
         currentCreature.EndInfection();
         currentCreature.gameObject.layer = 9;
         currentCreature = newCreature;
+
+        playerMovement.facing = currentCreature.facing;
 
         currentCreature.gameObject.layer = gameObject.layer;
         currentCreature.StartInfection();

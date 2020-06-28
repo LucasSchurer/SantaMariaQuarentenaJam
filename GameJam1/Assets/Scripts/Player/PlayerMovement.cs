@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float accelerationGrounded = 0.2f;
     public bool isGrounded;
     public bool canMove = true;
+    public Direction facing = Direction.Right;
 
     void Update()
     {
@@ -24,7 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
             float targetVelocityX = inputX * movementSpeed;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref smoothVelocity, accelerationGrounded);
-        } 
+
+            UpdateFacing(inputX);
+
+        } else
+            velocity.x = 0f; 
 
         velocity.y -= gravity * Time.deltaTime;
 
@@ -34,4 +39,28 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = controller.isGrounded;
     }
+
+    private void UpdateFacing(float inputX)
+    {
+        if (inputX == 1)
+        {
+            if (facing == Direction.Left)
+            {
+                facing = Direction.Right;
+
+                controller.transform.localScale = new Vector3(-controller.transform.localScale.x, controller.transform.localScale.y, controller.transform.localScale.z);
+            }
+        }
+        else if (inputX == -1)
+        {
+            if (facing == Direction.Right) 
+            {
+                facing = Direction.Left;
+
+                controller.transform.localScale = new Vector3(-controller.transform.localScale.x, controller.transform.localScale.y, controller.transform.localScale.z);
+            }
+        }
+    }
 }
+
+public enum Direction {Right, Left};
