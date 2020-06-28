@@ -8,6 +8,8 @@ public class PlayerAction : MonoBehaviour
     public static event InfectCreature infectCreature;
     public delegate void SearchingForHost(bool isSearching);
     public static event SearchingForHost searchingForHost;
+    public delegate void PossibleHostSelected(Creature selectedCreature);
+    public static event PossibleHostSelected possibleHostSelected;
 
     public Creature currentCreature;
     public float infectRadius = 10f;
@@ -91,6 +93,9 @@ public class PlayerAction : MonoBehaviour
                 selectedCreatureIndex = creaturesInRadarCount - 1;
 
             selectedCreature = creaturesInRadar[selectedCreatureIndex];
+
+            if (possibleHostSelected != null)
+                possibleHostSelected(selectedCreature);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
@@ -101,6 +106,9 @@ public class PlayerAction : MonoBehaviour
                 selectedCreatureIndex = 0;
 
             selectedCreature = creaturesInRadar[selectedCreatureIndex];
+
+            if (possibleHostSelected != null)
+                possibleHostSelected(selectedCreature);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
