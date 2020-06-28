@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAction playerAction;
     private CameraMovement cameraMovement;
     
-    void Awake()
+    void Start()
     {
         PlayerAction.infectCreature += InfectedCreature;
         PlayerAction.searchingForHost += SearchingForHost;
