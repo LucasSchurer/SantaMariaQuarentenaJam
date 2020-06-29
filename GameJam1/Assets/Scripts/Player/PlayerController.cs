@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         playerAction = GetComponent<PlayerAction>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
 
-        playerMovement.facing = currentCreature.facing;
+        playerMovement.facing = currentCreature.GetComponent<CreatureAI>().facing;
 
         // Update the infected creature
         currentCreature.StartInfection();
@@ -45,16 +45,21 @@ public class PlayerController : MonoBehaviour
         }
 
         infectionParticle.currentTarget = currentCreature.transform;
+
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent += OnTriggerEnterEvent;
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void InfectedCreature(Creature newCreature)
     {
-        currentCreature.facing = playerMovement.facing;
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent -= OnTriggerEnterEvent;
+        currentCreature.GetComponent<CreatureAI>().facing = playerMovement.facing;
         currentCreature.EndInfection();
         currentCreature.gameObject.layer = 9;
         currentCreature = newCreature;
 
-        playerMovement.facing = currentCreature.facing;
+        playerMovement.facing = currentCreature.GetComponent<CreatureAI>().facing;
 
         currentCreature.gameObject.layer = gameObject.layer;
         currentCreature.StartInfection();
@@ -73,6 +78,9 @@ public class PlayerController : MonoBehaviour
         }
         
         infectionParticle.currentTarget = currentCreature.transform;
+
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent += OnTriggerEnterEvent;
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void SearchingForHost(bool isSearching)
@@ -85,6 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerAction.infectCreature -= InfectedCreature;   
         PlayerAction.searchingForHost -= SearchingForHost; 
+        if (currentCreature != null)
+            currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent -= OnTriggerEnterEvent;
     }
 
     private void ChangeSlowMotion(bool enabled)
@@ -99,5 +109,10 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f;
         }  
+    }
+
+    private void OnTriggerEnterEvent(Collider2D coll)
+    {
+        print(coll.name);
     }
 }

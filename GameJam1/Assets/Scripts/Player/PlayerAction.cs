@@ -31,13 +31,14 @@ public class PlayerAction : MonoBehaviour
     {
         creaturesInRadar = new List<Creature>();
 
-        StartCoroutine(InfectionRadar());
+        //StartCoroutine(InfectionRadar());
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && creaturesInRadar.Count != 0)
+        if (Input.GetKeyDown(KeyCode.F))
         {
+            InfectionRadar();
             isSearchingForHost = !isSearchingForHost;
 
             if (searchingForHost != null)
@@ -119,7 +120,37 @@ public class PlayerAction : MonoBehaviour
             }
     }
 
-    private IEnumerator InfectionRadar()
+    private void InfectionRadar()
+    {
+        creaturesInRadar.Clear();
+
+        Collider2D[] hits = Physics2D.OverlapCircleAll(currentCreature.transform.position, infectRadius, infectMask);
+        List<Collider2D> tempList = hits.ToList();
+        
+        List<Collider2D> leftHits = tempList.Where
+            (x => x.transform.position.x <= currentCreature.transform.position.x).ToList()
+            .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
+    
+        leftHits.Reverse();
+
+        List<Collider2D> rightHits = tempList.Where
+            (x => x.transform.position.x > currentCreature.transform.position.x).ToList()
+            .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
+
+        List<Collider2D> hitList = leftHits.Concat(rightHits).ToList();
+
+        if (hitList != null)
+        {
+            foreach (Collider2D hit in hitList)
+            {   
+                Creature scannedCreature = hit.GetComponent<Creature>();
+                creaturesInRadar.Add(scannedCreature);
+                print(hit.name);
+            }
+        }
+    }
+
+    /*private IEnumerator InfectionRadar()
     {
         while(true)
         {
@@ -152,5 +183,5 @@ public class PlayerAction : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

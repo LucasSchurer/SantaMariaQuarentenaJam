@@ -19,7 +19,7 @@ TagManager:
   - Platform
   - InteractCollidable
   - InteractNonCollidable
-  - 
+  - SoundTrigger
   - 
   - 
   - 
@@ -41,4 +41,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Scenario
+    uniqueID: 3225214533
+    locked: 0
+  - name: Interactable
+    uniqueID: 22244489
+    locked: 0
+  - name: Platform
+    uniqueID: 2125151917
+    locked: 0
+  - name: Human
+    uniqueID: 3403049153
+    locked: 0
+  - name: Rat
+    uniqueID: 4263773655
+    locked: 0
+  - name: Particles
+    uniqueID: 356288133
+    locked: 0
+  - name: Player
+    uniqueID: 45989811
     locked: 0
