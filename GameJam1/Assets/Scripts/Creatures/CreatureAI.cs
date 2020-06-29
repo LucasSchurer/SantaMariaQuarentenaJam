@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class CreatureAI : MonoBehaviour
 {
+    protected Animator anim;
+
     public struct MovementInfo
     {
         public float movementSpeed;
@@ -23,6 +25,7 @@ public abstract class CreatureAI : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        anim = GetComponent<Animator>();
     }
 
     protected abstract void SetMovementInfo();

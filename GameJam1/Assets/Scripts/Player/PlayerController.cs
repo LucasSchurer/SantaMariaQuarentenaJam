@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
         // Set the movement controller to the current controlled creature
         playerMovement.controller = currentCreature.GetComponent<CharacterController>();
+        playerMovement.infectedCreatureAnimator = currentCreature.GetComponent<Animator>();
 
         // Set the current creature to the player action
         playerAction.currentCreature = currentCreature;
@@ -36,15 +37,23 @@ public class PlayerController : MonoBehaviour
         cameraMovement.currentTarget = currentCreature.transform;
 
         // Adjust the eye
-        infectedEye.SetParent(currentCreature.transform);
-        infectedEye.localPosition = currentCreature.GetEyePosition();
-        infectedEye.localScale = currentCreature.GetEyeScale();
+        if (infectedEye != null)
+        {
+            infectedEye.SetParent(currentCreature.transform);
+            infectedEye.localPosition = currentCreature.GetEyePosition();
+            infectedEye.localScale = currentCreature.GetEyeScale();
+        }
 
         infectionParticle.currentTarget = currentCreature.transform;
+
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent += OnTriggerEnterEvent;
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void InfectedCreature(Creature newCreature)
     {
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent -= OnTriggerEnterEvent;
         currentCreature.facing = playerMovement.facing;
         currentCreature.EndInfection();
         currentCreature.gameObject.layer = 9;
@@ -56,14 +65,22 @@ public class PlayerController : MonoBehaviour
         currentCreature.StartInfection();
 
         playerMovement.controller = currentCreature.GetComponent<CharacterController>();
+        playerMovement.infectedCreatureAnimator = currentCreature.GetComponent<Animator>();
+        
         playerAction.currentCreature = currentCreature;
         cameraMovement.currentTarget = currentCreature.transform;
 
-        infectedEye.SetParent(currentCreature.transform);
-        infectedEye.localPosition = currentCreature.GetEyePosition();
-        infectedEye.localScale = currentCreature.GetEyeScale();
-
+        if (infectedEye != null)
+        {
+            infectedEye.SetParent(currentCreature.transform);
+            infectedEye.localPosition = currentCreature.GetEyePosition();
+            infectedEye.localScale = currentCreature.GetEyeScale();
+        }
+        
         infectionParticle.currentTarget = currentCreature.transform;
+
+        currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent += OnTriggerEnterEvent;
+        currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     private void SearchingForHost(bool isSearching)
@@ -76,6 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         PlayerAction.infectCreature -= InfectedCreature;   
         PlayerAction.searchingForHost -= SearchingForHost; 
+        if (currentCreature != null)
+            currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent -= OnTriggerEnterEvent;
     }
 
     private void ChangeSlowMotion(bool enabled)
@@ -90,5 +109,10 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f;
         }  
+    }
+
+    private void OnTriggerEnterEvent(Collider2D coll)
+    {
+        print(coll.name);
     }
 }

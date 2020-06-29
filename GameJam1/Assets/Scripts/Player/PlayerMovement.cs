@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public Animator infectedCreatureAnimator;
     public float gravity;
     public float movementSpeed;
     private Vector2 velocity;
@@ -28,10 +29,21 @@ public class PlayerMovement : MonoBehaviour
 
             UpdateFacing(inputX);
 
+            if (inputX != 0 && infectedCreatureAnimator != null)
+            {
+                infectedCreatureAnimator.SetBool("isWalking", true);
+                infectedCreatureAnimator.SetBool("isIdle", false);
+            } 
+            else if (inputX == 0 && infectedCreatureAnimator != null)
+            {
+                infectedCreatureAnimator.SetBool("isWalking", false);
+                infectedCreatureAnimator.SetBool("isIdle", true); 
+            }
+
         } else
             velocity.x = 0f; 
 
-        velocity.y -= gravity * Time.deltaTime;
+        velocity.y -= gravity * Time.deltaTime;            
 
         controller.move(velocity * Time.deltaTime);
 
