@@ -26,6 +26,17 @@ public class HumanAI : CreatureAI
 
             SelectPattern();
 
+            if (movementInfo.velocity.x != 0)
+            {
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isIdle", false);
+            } 
+            else if (movementInfo.velocity.x == 0)
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isIdle", true); 
+            }
+
             controller.move(movementInfo.velocity * Time.deltaTime);
 
             movementInfo.velocity = controller.velocity;
@@ -48,6 +59,9 @@ public class HumanAI : CreatureAI
                 break;
             }
         }
+
+        AudioSource audioSrc = new AudioSource();
+        
     }
 
     private void Still()
@@ -76,8 +90,7 @@ public class HumanAI : CreatureAI
             {
                 MoveTo(currentDestination);
                 UpdateFacing(currentDestination.x < transform.position.x ? -1 : 1);
-            }
-                
+            }    
         }
     }
 }

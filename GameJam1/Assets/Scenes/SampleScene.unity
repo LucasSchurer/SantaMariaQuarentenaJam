@@ -965,6 +965,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1710863743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3195117532884291068, guid: d40b49cccd02ff647b7c10093ad1e6d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5141529151184796585}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1710863744
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710863743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b07eb24f203fd54093216a9391dbc15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1714651748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,10 +1409,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3195117532884291066, guid: d40b49cccd02ff647b7c10093ad1e6d7,
+    - target: {fileID: 3195117532884291063, guid: d40b49cccd02ff647b7c10093ad1e6d7,
         type: 3}
-      propertyPath: triggerMask.m_Bits
-      value: 8192
+      propertyPath: m_Color.r
+      value: 0.48584908
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195117532884291063, guid: d40b49cccd02ff647b7c10093ad1e6d7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8597053
+      objectReference: {fileID: 0}
+    - target: {fileID: 3195117532884291063, guid: d40b49cccd02ff647b7c10093ad1e6d7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3195117532884291068, guid: d40b49cccd02ff647b7c10093ad1e6d7,
         type: 3}
@@ -1487,21 +1522,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 452823730968978344, guid: e7c2f3ed0fbce8d48bc7ae0a8fcfbf15,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 452823730968978345, guid: e7c2f3ed0fbce8d48bc7ae0a8fcfbf15,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 452823730968978346, guid: e7c2f3ed0fbce8d48bc7ae0a8fcfbf15,
-        type: 3}
-      propertyPath: triggerMask.m_Bits
-      value: 8192
-      objectReference: {fileID: 0}
     - target: {fileID: 452823730968978347, guid: e7c2f3ed0fbce8d48bc7ae0a8fcfbf15,
         type: 3}
       propertyPath: m_Name

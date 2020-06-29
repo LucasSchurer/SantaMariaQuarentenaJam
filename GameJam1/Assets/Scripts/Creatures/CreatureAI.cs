@@ -37,6 +37,12 @@ public abstract class CreatureAI : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+
+        if (movementPattern == MovementPattern.Wandering)
+        {
+            currentDestination = GenerateNewPoint(wanderingRadius);
+        }
+            
     }
 
     protected abstract void SetMovementInfo();
