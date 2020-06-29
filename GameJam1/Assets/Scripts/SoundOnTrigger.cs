@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class SoundOnTrigger : MonoBehaviour
 {
+    public AudioClip playSound;
+    public float volume;
+    AudioSource audio;
+    public bool alreadyPlay = false;
 
-    public AudioSource TocarSom;
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        TocarSom.Play();  
+        if (!alreadyPlay) 
+        {
+            audio.PlayOneShot(playSound, volume);
+            alreadyPlay = true;
+        }
     }
 
 }
