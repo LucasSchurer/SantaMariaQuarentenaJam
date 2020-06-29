@@ -24,8 +24,13 @@ public class Human : Creature
         return "Human";
     }
 
-    override public Vector3 GetCameraPosition()
+    override public Vector2 GetEyePosition()
     {
-        return new Vector3(0f, 0.796f, 0.21499f);
+        return new Vector2(0.2f, 0.351f);
+    }
+
+    override public Vector2 GetEyeScale()
+    {
+        return new Vector2(.40f, 0.16f);
     }
 }

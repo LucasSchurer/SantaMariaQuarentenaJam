@@ -14,8 +14,13 @@ public class Rat : Creature
         return "Rat";
     }
 
-    override public Vector3 GetCameraPosition()
+    override public Vector2 GetEyePosition()
     {
-        return new Vector3(0f, 0.26f, 0.252f);
+        return new Vector2(.324f, 0f);
+    }
+
+    override public Vector2 GetEyeScale()
+    {
+        return new Vector2(0.28f, 0.621f);
     }
 }

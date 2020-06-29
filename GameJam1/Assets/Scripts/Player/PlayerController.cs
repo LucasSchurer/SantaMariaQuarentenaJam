@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Creature currentCreature;
+    public Transform infectedEye;
+    public InfectionParticle infectionParticle;
     private PlayerMovement playerMovement;
     private PlayerAction playerAction;
     private CameraMovement cameraMovement;
@@ -32,6 +34,13 @@ public class PlayerController : MonoBehaviour
 
         // Adjust the camera
         cameraMovement.currentTarget = currentCreature.transform;
+
+        // Adjust the eye
+        infectedEye.SetParent(currentCreature.transform);
+        infectedEye.localPosition = currentCreature.GetEyePosition();
+        infectedEye.localScale = currentCreature.GetEyeScale();
+
+        infectionParticle.currentTarget = currentCreature.transform;
     }
 
     private void InfectedCreature(Creature newCreature)
@@ -49,6 +58,12 @@ public class PlayerController : MonoBehaviour
         playerMovement.controller = currentCreature.GetComponent<CharacterController>();
         playerAction.currentCreature = currentCreature;
         cameraMovement.currentTarget = currentCreature.transform;
+
+        infectedEye.SetParent(currentCreature.transform);
+        infectedEye.localPosition = currentCreature.GetEyePosition();
+        infectedEye.localScale = currentCreature.GetEyeScale();
+
+        infectionParticle.currentTarget = currentCreature.transform;
     }
 
     private void SearchingForHost(bool isSearching)

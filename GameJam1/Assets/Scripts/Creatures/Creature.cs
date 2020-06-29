@@ -30,5 +30,6 @@ public abstract class Creature : MonoBehaviour
 
     abstract public string GetName();
 
-    abstract public Vector3 GetCameraPosition();
+    abstract public Vector2 GetEyePosition();
+    abstract public Vector2 GetEyeScale();
 }
