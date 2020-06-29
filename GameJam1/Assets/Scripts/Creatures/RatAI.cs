@@ -17,6 +17,9 @@ public class RatAI : CreatureAI
     // Update is called once per frame
     void Update()
     {
+        if (!anim.GetBool("isIdle"))
+            anim.SetBool("isIdle", true);
+
         if (controller.isGrounded)
             movementInfo.velocity.y = 0f;
 
