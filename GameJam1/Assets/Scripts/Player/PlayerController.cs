@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         playerAction = GetComponent<PlayerAction>();
         cameraMovement = Camera.main.GetComponent<CameraMovement>();
 
-        playerMovement.facing = currentCreature.facing;
+        playerMovement.facing = currentCreature.GetComponent<CreatureAI>().facing;
 
         // Update the infected creature
         currentCreature.StartInfection();
@@ -54,12 +54,12 @@ public class PlayerController : MonoBehaviour
     {
         currentCreature.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         currentCreature.GetComponent<CharacterController>().onTriggerEnterEvent -= OnTriggerEnterEvent;
-        currentCreature.facing = playerMovement.facing;
+        currentCreature.GetComponent<CreatureAI>().facing = playerMovement.facing;
         currentCreature.EndInfection();
         currentCreature.gameObject.layer = 9;
         currentCreature = newCreature;
 
-        playerMovement.facing = currentCreature.facing;
+        playerMovement.facing = currentCreature.GetComponent<CreatureAI>().facing;
 
         currentCreature.gameObject.layer = gameObject.layer;
         currentCreature.StartInfection();
