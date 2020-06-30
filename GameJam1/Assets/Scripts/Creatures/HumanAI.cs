@@ -59,9 +59,6 @@ public class HumanAI : CreatureAI
                 break;
             }
         }
-
-        AudioSource audioSrc = new AudioSource();
-        
     }
 
     private void Still()
