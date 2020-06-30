@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3195117532884291066}
   - component: {fileID: 3195117532884291067}
   - component: {fileID: 3195117532884291061}
+  - component: {fileID: 1710863744}
   m_Layer: 9
   m_Name: Human
   m_TagString: Untagged
@@ -307,3 +308,22 @@ MonoBehaviour:
   wanderingIdleTime: 2
   wanderingIdleTimeCount: 2
   facing: 0
+--- !u!95 &1710863744
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195117532884291068}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b07eb24f203fd54093216a9391dbc15, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
