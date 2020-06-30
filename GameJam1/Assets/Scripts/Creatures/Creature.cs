@@ -7,7 +7,6 @@ public abstract class Creature : MonoBehaviour
 {
     private CreatureAI creatureAI;
     public bool isBeingControlled = false;
-    public Direction facing = Direction.Right;
     public Animator anim;
 
     void Awake()
