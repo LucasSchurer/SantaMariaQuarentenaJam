@@ -17,7 +17,7 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3799114725998218434}
-    m_Position: {x: 285, y: 255, z: 0}
+    m_Position: {x: 250, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -61,7 +61,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Human@Walking
-  m_Speed: 2.5
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8247211888843031133}
@@ -76,7 +76,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 3859dd7de391ace499dd0c8f0f16c5d6, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: walkingSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -119,13 +119,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isWalking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
