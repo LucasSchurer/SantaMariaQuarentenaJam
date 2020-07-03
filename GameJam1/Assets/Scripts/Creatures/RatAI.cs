@@ -6,7 +6,7 @@ public class RatAI : CreatureAI
 {
     protected override void SetMovementInfo()
     {
-        movementInfo = new MovementInfo(2f, 15f);
+        movementInfo = new MovementInfo(4f, 15f);
     }
 
     void Start()
