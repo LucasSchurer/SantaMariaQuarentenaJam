@@ -141,6 +141,8 @@ public class PlayerAction : MonoBehaviour
                 if (searchingForHost != null)
                 searchingForHost(false);
 
+                SoundManagerScript.PlaySound("transition");
+
                 return;
             }
         }

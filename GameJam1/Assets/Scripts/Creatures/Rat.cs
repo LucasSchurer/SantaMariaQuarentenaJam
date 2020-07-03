@@ -7,6 +7,7 @@ public class Rat : Creature
     override public void UseAction()
     {
         print("SQUEEEK");
+        SoundManagerScript.PlaySound("squeek");
     }
 
     override public string GetName()

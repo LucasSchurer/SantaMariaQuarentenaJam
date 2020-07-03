@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static AudioClip transitionSound, possessSound;
+    public static AudioClip squeekSound, infectionSound;
     static AudioSource audioSrc;
-
 
     void Start()
     {
-        //transitionSound = Resources.Load<AudioClip>("");
-        //possessSound = Resources.Load<AudioClip>("");
+        squeekSound = Resources.Load<AudioClip>("squeek");
+        infectionSound = Resources.Load<AudioClip>("transition");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -23,14 +22,22 @@ public class SoundManagerScript : MonoBehaviour
 
     public static void PlaySound (string clip)
     {
-        //switch (clip)
+        switch (clip)
         {
-           // case "transitionSound":
-               // audioSrc.PlayOneShot();
-               // break;
-           // case "possessSound":
-               // audioSrc.PlayOneShot();
-               // break;
+           case "squeek":
+           {
+               audioSrc.volume = 0.1f;
+               audioSrc.PlayOneShot(squeekSound);
+               
+               break;
+           }
+
+           case "transition":
+           {
+               audioSrc.volume = 1f;
+               audioSrc.PlayOneShot(infectionSound);
+               break;
+           }
         }
     }
  }
