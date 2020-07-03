@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         // Set the movement controller to the current controlled creature
         playerMovement.controller = currentCreature.GetComponent<CharacterController>();
         playerMovement.infectedCreatureAnimator = currentCreature.GetComponent<Animator>();
+        playerMovement.movementSpeed = currentCreature.GetComponent<CreatureAI>().movementInfo.movementSpeed;
 
         // Set the current creature to the player action
         playerAction.currentCreature = currentCreature;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
         playerMovement.controller = currentCreature.GetComponent<CharacterController>();
         playerMovement.infectedCreatureAnimator = currentCreature.GetComponent<Animator>();
+        playerMovement.movementSpeed = currentCreature.GetComponent<CreatureAI>().movementInfo.movementSpeed;
         
         playerAction.currentCreature = currentCreature;
         cameraMovement.currentTarget = currentCreature.transform;

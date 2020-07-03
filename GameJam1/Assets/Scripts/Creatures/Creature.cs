@@ -7,7 +7,7 @@ public abstract class Creature : MonoBehaviour
 {
     private CreatureAI creatureAI;
     public bool isBeingControlled = false;
-    public Animator anim;
+    protected Animator anim;
 
     void Awake()
     {

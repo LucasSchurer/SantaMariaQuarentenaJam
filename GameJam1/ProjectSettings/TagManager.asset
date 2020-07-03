@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Door
+  - Valve
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - InteractCollidable
   - InteractNonCollidable
   - SoundTrigger
-  - 
+  - RunningWater
   - 
   - 
   - 
@@ -45,11 +45,17 @@ TagManager:
   - name: Scenario
     uniqueID: 3225214533
     locked: 0
-  - name: Interactable
-    uniqueID: 22244489
-    locked: 0
   - name: Platform
     uniqueID: 2125151917
+    locked: 0
+  - name: Middleground
+    uniqueID: 3081631253
+    locked: 0
+  - name: Pipes
+    uniqueID: 929827021
+    locked: 0
+  - name: Interactable
+    uniqueID: 22244489
     locked: 0
   - name: Human
     uniqueID: 3403049153
@@ -62,4 +68,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 45989811
+    locked: 0
+  - name: Lights
+    uniqueID: 3554478319
     locked: 0

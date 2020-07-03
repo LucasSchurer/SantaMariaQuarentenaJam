@@ -11,6 +11,8 @@ public class PlayerAction : MonoBehaviour
     public static event SearchingForHost searchingForHost;
     public delegate void PossibleHostSelected(Creature selectedCreature);
     public static event PossibleHostSelected possibleHostSelected;
+    public delegate void WaterBlockedInfection(Transform pipePosition);
+    public static event WaterBlockedInfection waterBlockedInfection;
 
     public Creature currentCreature;
     public float infectRadius = 10f;
@@ -45,7 +47,7 @@ public class PlayerAction : MonoBehaviour
                 searchingForHost(isSearchingForHost);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !isSearchingForHost)
         {
             currentCreature.UseAction();
         }
@@ -106,18 +108,42 @@ public class PlayerAction : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E))
-            if  (infectCreature != null)
+        {
+            Vector2 origin = currentCreature.transform.position;
+            Vector2 destination = selectedCreature.transform.position;
+            Vector2 direction = destination - origin;
+            
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, Vector2.Distance(origin, destination) * 2, 1 << 14);
+
+            if (hit)
             {
+                hit.transform.SendMessage("Hightlight");
+
+                if (waterBlockedInfection != null)
+                {
+                    waterBlockedInfection(hit.transform);
+                }
+
+                selectedCreature = null;
+                isSearchingForHost = false;
+
+                if (searchingForHost != null)
+                    searchingForHost(false);
+            }
+            else
+            {
+                if  (infectCreature != null)
                 infectCreature(selectedCreature);
                 
                 selectedCreature = null;
                 isSearchingForHost = false;
 
                 if (searchingForHost != null)
-                    searchingForHost(false);
+                searchingForHost(false);
 
                 return;
             }
+        }
     }
 
     private void InfectionRadar()
@@ -149,39 +175,4 @@ public class PlayerAction : MonoBehaviour
             }
         }
     }
-
-    /*private IEnumerator InfectionRadar()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(infectRadarTime);
-
-            creaturesInRadar.Clear();
-
-            Collider2D[] hits = Physics2D.OverlapCircleAll(currentCreature.transform.position, infectRadius, infectMask);
-            List<Collider2D> tempList = hits.ToList();
-            
-            List<Collider2D> leftHits = tempList.Where
-                (x => x.transform.position.x <= currentCreature.transform.position.x).ToList()
-                .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
-        
-            leftHits.Reverse();
-
-            List<Collider2D> rightHits = tempList.Where
-                (x => x.transform.position.x > currentCreature.transform.position.x).ToList()
-                .OrderBy(x => (new Vector3(currentCreature.transform.position.x, 0f, 0f) - x.transform.position).sqrMagnitude).ToList();
-
-            List<Collider2D> hitList = leftHits.Concat(rightHits).ToList();
-
-            if (hitList != null)
-            {
-                foreach (Collider2D hit in hitList)
-                {   
-                    Creature scannedCreature = hit.GetComponent<Creature>();
-                    creaturesInRadar.Add(scannedCreature);
-                    print(hit.name);
-                }
-            }
-        }
-    }*/
 }
