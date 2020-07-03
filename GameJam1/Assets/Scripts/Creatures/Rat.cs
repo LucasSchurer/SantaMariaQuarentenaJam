@@ -16,11 +16,11 @@ public class Rat : Creature
 
     override public Vector2 GetEyePosition()
     {
-        return new Vector2(.324f, 0f);
+        return new Vector2(4.5f, 0.4f);
     }
 
     override public Vector2 GetEyeScale()
     {
-        return new Vector2(0.28f, 0.621f);
+        return new Vector2(1, 1);
     }
 }

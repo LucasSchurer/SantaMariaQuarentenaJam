@@ -47,7 +47,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -665,9 +665,9 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: -0, y: 0.0001255715, z: 0}
-    m_Scale: {x: 0, y: 2.5729103, z: 35.789658}
+    m_Position: {x: 0.00012770884, y: -1.2012922, z: 9.432063}
+    m_Rotation: {x: -0, y: 0.0011011655, z: 0}
+    m_Scale: {x: -1.9165214e-13, y: 2.5729103, z: 50.513664}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -4737,8 +4737,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 356288133
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 4
   m_SortMode: 0
