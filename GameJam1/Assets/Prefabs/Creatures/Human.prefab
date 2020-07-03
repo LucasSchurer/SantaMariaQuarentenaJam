@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -891918143
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f0c7727df3ac27c44816e7b6d491c483, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -152,7 +152,7 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 19456
   triggerMask:
     serializedVersion: 2
     m_Bits: 8192
@@ -209,7 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingControlled: 0
-  anim: {fileID: 0}
 --- !u!114 &2931937533951736890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +273,8 @@ MonoBehaviour:
   - {fileID: 4881165690130373496}
   - {fileID: 4881165689828208773}
   m_Bounds:
-    m_Center: {x: 0.066973686, y: 0.08500004, z: 0}
-    m_Extent: {x: 7.6930256, y: 9.325001, z: 0}
+    m_Center: {x: 0.066978455, y: 0.08500004, z: 0}
+    m_Extent: {x: 7.6930227, y: 9.325001, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
 --- !u!1 &4881165688430765093
