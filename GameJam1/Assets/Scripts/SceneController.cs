@@ -9,6 +9,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        //
         StartCoroutine(FadeIn(1f));
     }
 
