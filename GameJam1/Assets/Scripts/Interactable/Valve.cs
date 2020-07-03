@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Valve : MonoBehaviour
 {
-    public Transform controlledPipe;
+    public List<Transform> controlledPipeList;
     private Animator anim;
 
     void Start()
@@ -14,27 +14,30 @@ public class Valve : MonoBehaviour
 
     public void ChangePipeState()
     {
-        if (controlledPipe != null)
+        foreach (Transform controlledPipe in controlledPipeList)
         {
-            if (controlledPipe.gameObject.activeInHierarchy)
+            if (controlledPipe != null)
             {
-                StartCoroutine(ChangePipe());
-            } 
-            else
-            {
-                controlledPipe.gameObject.SetActive(true);
-                anim.SetTrigger("deactivated");
+                if (controlledPipe.gameObject.activeInHierarchy)
+                {
+                    StartCoroutine(ChangePipe(controlledPipe));
+                } 
+                else
+                {
+                    controlledPipe.gameObject.SetActive(true);
+                    anim.SetTrigger("deactivated");
+                }
             }
         }
     }
 
-    private IEnumerator ChangePipe()
+    private IEnumerator ChangePipe(Transform controlledPipe)
     {
         anim.SetTrigger("activated");
 
         yield return new WaitForSeconds(2f);
         controlledPipe.gameObject.SetActive(false);
-
+    
         yield return null;
     }
 }
